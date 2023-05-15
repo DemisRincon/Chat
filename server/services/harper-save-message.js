@@ -1,5 +1,3 @@
-// server/services/harper-save-message.js
-
 var axios = require('axios');
 
 function harperSaveMessage(message, username, room) {

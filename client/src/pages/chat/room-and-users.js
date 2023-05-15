@@ -1,4 +1,3 @@
-// client/src/pages/chat/room-and-users.js
 
 import styles from './styles.module.css';
 import { useState, useEffect } from 'react';
@@ -21,7 +20,6 @@ const RoomAndUsers = ({ socket, username, room }) => {
   const leaveRoom = () => {
     const __createdtime__ = Date.now();
     socket.emit('leave_room', { username, room, __createdtime__ });
-    // Redirect to home page
     navigate('/', { replace: true });
   };
 

@@ -1,17 +1,17 @@
 require('dotenv').config();
-console.log(process.env.HARPERDB_URL); // remove this after you've confirmed it working
+console.log(process.env.HARPERDB_URL); 
 const express = require('express');
 const app = express();
 const http = require('http');
 const cors = require('cors');
-const { Server } = require('socket.io'); // Add this
+const { Server } = require('socket.io'); 
 const harperSaveMessage = require('./services/harper-save-message');
-const harperGetMessages = require('./services/harper-get-messages'); // Add this
+const harperGetMessages = require('./services/harper-get-messages'); 
 const leaveRoom = require('./utils/leave-room');
 
-app.use(cors()); // Add cors middleware
+app.use(cors()); 
 
-const server = http.createServer(app); // Add this
+const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
@@ -21,7 +21,7 @@ const io = new Server(server, {
 });
 
 const CHAT_BOT = 'ChatBot';
-// Add this
+
 let chatRoom = '';
 let allUsers = [];
 io.on('connection', (socket) => {
@@ -71,8 +71,8 @@ io.on('connection', (socket) => {
   });
   socket.on('send_message', (data) => {
     const { message, username, room, __createdtime__ } = data;
-    io.in(room).emit('receive_message', data); // Send to all users in room, including sender
-    harperSaveMessage(message, username, room, __createdtime__) // Save message in db
+    io.in(room).emit('receive_message', data); 
+    harperSaveMessage(message, username, room, __createdtime__)
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   });
@@ -88,7 +88,7 @@ io.on('connection', (socket) => {
     }
   });
 });
-// Add this
+
 app.get('/', (req, res) => {
   res.send('Hello world');
 });

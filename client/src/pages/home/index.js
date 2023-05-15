@@ -1,17 +1,15 @@
-// client/src/pages/home/index.js
-
 import styles from './styles.module.css';
-import { useNavigate } from 'react-router-dom'; // Add this
+import { useNavigate } from 'react-router-dom'; 
 
 const Home = ({ username, setUsername, room, setRoom, socket }) => {
-    const navigate = useNavigate(); // Add this
+    const navigate = useNavigate(); 
     const joinRoom = () => {
         if (room !== '' && username !== '') {
           socket.emit('join_room', { username, room });
         }
     
-        // Redirect to /chat
-        navigate('/chat', { replace: true }); // Add this
+       
+        navigate('/chat', { replace: true });
       };
     return (
         <div className={styles.container}>
@@ -20,12 +18,12 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
                 <input
                     className={styles.input}
                     placeholder='Username...'
-                    onChange={(e) => setUsername(e.target.value)} // Add this
+                    onChange={(e) => setUsername(e.target.value)} 
                 />
 
                 <select
                     className={styles.input}
-                    onChange={(e) => setRoom(e.target.value)} // Add this
+                    onChange={(e) => setRoom(e.target.value)} 
                 >
                     <option>-- Select Room --</option>
                     <option value='javascript'>JavaScript</option>
@@ -36,7 +34,7 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
                 <button
                     className='btn btn-secondary'
                     style={{ width: '100%' }}
-                    onClick={joinRoom} // Add this
+                    onClick={joinRoom} 
                 >
                     Join Room
                 </button>
